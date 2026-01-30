@@ -36,7 +36,7 @@
 
 ## Phase 2: Core Screens
 
-- [ ] **2.1** Build Venues screen
+- [x] **2.1** Build Venues screen
   - Searchable/filterable venue list (`/` search, `f` filter menu)
   - Venue detail view with all fields and stats (total shows, total earned)
   - Add venue form (`n` key)
@@ -45,21 +45,21 @@
   - See: [Venues](./plans/features/02-venues.md)
   - **Depends on**: 1.2, 1.4 (data model, shared widgets)
 
-- [ ] **2.1a** Implement venue deletion with soft-delete
+- [x] **2.1a** Implement venue deletion with soft-delete
   - Delete venue with typed "DELETE" confirmation (`d` key)
   - Preserve venue name on past shows (denormalized)
   - Cancel future shows and deactivate recurring gigs
   - See: [Venues](./plans/features/02-venues.md), [Algorithms](./plans/features/13-algorithms.md)
   - **Depends on**: 2.1
 
-- [ ] **2.2a** Build Shows list and filters
+- [x] **2.2a** Build Shows list and filters
   - Show list with columns: Date, Venue, Pay, Status
   - Filter menu (`f` key): Upcoming, Past, All, Unpaid, Needs Invoice
   - Search functionality (`/` key)
   - See: [Shows](./plans/features/03-shows.md)
   - **Depends on**: 2.1 (venue selection requires venues)
 
-- [ ] **2.2b** Build Show add/edit flows
+- [x] **2.2b** Build Show add/edit flows
   - Quick add show (`n` - existing venue dropdown)
   - Add show with new venue (`N` - creates minimal venue)
   - Edit show details (`e` key)
@@ -67,14 +67,14 @@
   - See: [Shows](./plans/features/03-shows.md)
   - **Depends on**: 2.2a, 1.4 (list exists, shared widgets)
 
-- [ ] **2.2c** Implement payment actions
+- [x] **2.2c** Implement payment actions
   - Mark paid (`p`) with date picker modal
   - Mark invoice sent (`i`) - only if venue requires invoice
   - Delete show with confirmation (`d` key)
   - See: [Shows](./plans/features/03-shows.md), [Payments](./plans/features/06-payments.md)
   - **Depends on**: 2.2b
 
-- [ ] **2.3** Build Calendar screen
+- [x] **2.3** Build Calendar screen
   - Month view with show markers (color-coded by payment status)
   - Agenda view (chronological list with filters)
   - Toggle between views (`Tab` or `m`/`a`)
@@ -82,7 +82,7 @@
   - See: [Calendar](./plans/features/04-calendar.md)
   - **Depends on**: 2.2a (calendar displays shows)
 
-- [ ] **2.4** Build Dashboard screen
+- [x] **2.4** Build Dashboard screen
   - Quick stats (upcoming shows, YTD earnings, unpaid balance)
   - Next 14 days show list (max 5 with overflow count)
   - Needs attention section with priority-ordered action items
@@ -91,7 +91,7 @@
   - See: [Dashboard](./plans/features/12-dashboard.md), [Algorithms](./plans/features/13-algorithms.md)
   - **Depends on**: 2.2c, 2.3 (reuses show list, needs payment status)
 
-- [ ] **2.5** Implement first-run onboarding
+- [x] **2.5** Implement first-run onboarding
   - "Getting Started" guide for new users (empty state)
   - Welcome modal on first launch
   - Quick-add prompts to create first venue

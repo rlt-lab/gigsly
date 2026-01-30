@@ -13,7 +13,7 @@
 - Check available skills before starting any significant work
 - Use `superpowers:brainstorming` before implementing new features
 - Use `superpowers:writing-plans` for multi-step implementation tasks
-- Use `superpowers:test-driven-development` when writing new functionality
+- **Always use `superpowers:test-driven-development`** - this is mandatory for all new functionality
 - Use `superpowers:systematic-debugging` when encountering bugs
 - Use `superpowers:verification-before-completion` before claiming work is done
 
@@ -62,7 +62,11 @@ gigsly/
 
 5. **No Silent Failures** - All errors must surface to the user with actionable messages.
 
-6. **Test Before Commit** - Run tests before any commit. Use TDD for new features.
+6. **Test-Driven Development** - Always write tests BEFORE implementation code:
+   - Write failing tests that define expected behavior
+   - Implement minimum code to make tests pass
+   - Refactor while keeping tests green
+   - Run `uv run pytest` before any commit
 
 7. **Minimal Dependencies** - Only add packages that provide significant value. Prefer stdlib when reasonable.
 

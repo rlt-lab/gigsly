@@ -4,22 +4,21 @@ from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.widgets import Footer, Header, Static
 
+from gigsly.db.session import init_db
+from gigsly.screens.dashboard import DashboardScreen
+from gigsly.screens.venues import VenuesScreen
+from gigsly.screens.shows import ShowsScreen
+from gigsly.screens.calendar import CalendarScreen
+
 
 class GigslyApp(App):
     """Main Gigsly TUI application."""
 
     TITLE = "Gigsly"
+
     CSS = """
     Screen {
-        align: center middle;
-    }
-
-    #welcome {
-        width: 60;
-        height: auto;
-        padding: 2 4;
-        border: solid green;
-        text-align: center;
+        background: $surface;
     }
     """
 
@@ -34,21 +33,31 @@ class GigslyApp(App):
         Binding("q", "quit", "Quit"),
     ]
 
-    def compose(self) -> ComposeResult:
-        """Compose the initial UI."""
-        yield Header()
-        yield Static(
-            "Welcome to Gigsly!\n\n"
-            "Track your gigs, venues, payments, and booking outreach.\n\n"
-            "Press [bold]v[/bold] for Venues, [bold]s[/bold] for Shows,\n"
-            "[bold]c[/bold] for Calendar, or [bold]?[/bold] for help.",
-            id="welcome",
-        )
-        yield Footer()
+    SCREENS = {
+        "dashboard": DashboardScreen,
+        "venues": VenuesScreen,
+        "shows": ShowsScreen,
+        "calendar": CalendarScreen,
+    }
+
+    def on_mount(self) -> None:
+        """Initialize the app and show dashboard."""
+        # Ensure database is initialized
+        init_db()
+        # Push the dashboard screen
+        self.push_screen(DashboardScreen())
 
     def action_switch_screen(self, screen_name: str) -> None:
         """Switch to a different screen."""
-        self.notify(f"{screen_name.title()} screen - Coming soon!")
+        if screen_name == "report":
+            self.notify("Full Report - Coming soon!")
+            return
+
+        screen_class = self.SCREENS.get(screen_name)
+        if screen_class:
+            self.switch_screen(screen_class())
+        else:
+            self.notify(f"Unknown screen: {screen_name}")
 
     def action_show_help(self) -> None:
         """Show help overlay."""
