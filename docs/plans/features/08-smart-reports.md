@@ -11,12 +11,12 @@ The smart report is the primary tool for knowing what needs your attention. It u
 
 ## Priority Scoring Algorithm
 
-Each venue is scored 0-100 based on these factors:
+Each venue is scored based on these factors. Raw scores are uncapped but categorized into priority levels.
 
-| Factor | Weight | Scoring |
+| Factor | Points | Scoring |
 |--------|--------|---------|
-| Unpaid gigs | 35 pts | +35 per unpaid gig > 30 days old |
-| Invoice pending | 30 pts | +30 per completed gig needing invoice |
+| Unpaid gigs | 35 pts | +35 for first unpaid gig > 30 days, +15 for each additional |
+| Invoice pending | 30 pts | +30 for first, +10 for each additional |
 | Booking window approaching | 20 pts | +20 if ≤7 days, +10 if ≤14 days |
 | Low show count | 10 pts | +10 if 0 upcoming, +5 if 1-2 upcoming |
 | Days since contact | 5 pts | +5 if 90+ days, +3 if 60-89 days |
@@ -25,6 +25,8 @@ Each venue is scored 0-100 based on these factors:
 - **Critical** (50+): Red, needs immediate action
 - **Attention** (25-49): Yellow, handle soon
 - **Monitor** (1-24): Low priority, informational
+
+**Note**: Scores can exceed 100 for venues with multiple urgent issues. The score is a priority indicator, not a percentage.
 
 ## Report Layout
 

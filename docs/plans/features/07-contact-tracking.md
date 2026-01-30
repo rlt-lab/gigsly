@@ -21,13 +21,31 @@ From venue detail view, press `c` to log contact:
 │         • In Person                                       │
 │         • Other                                           │
 │                                                           │
+│ Outcome: [Awaiting Response ▼]                           │
+│          • Booked                                         │
+│          • Declined                                       │
+│          • Awaiting Response                              │
+│          • Follow Up Needed                               │
+│          • Other                                          │
+│                                                           │
+│ Follow up on: [________] (optional)                      │
+│                                                           │
 │ Notes:  [________________________________]               │
-│         [________________________________]               │
 │         [________________________________]               │
 │                                                           │
 │                        [Save]  [Cancel]                   │
 └───────────────────────────────────────────────────────────┘
 ```
+
+### Outcome Values
+
+| Outcome | Meaning | Effect on Smart Report |
+|---------|---------|------------------------|
+| Booked | Gig was booked from this contact | Venue deprioritized for booking outreach |
+| Declined | Venue said no | Resets contact reminder (try again later) |
+| Awaiting Response | Waiting to hear back | Suppresses "needs contact" for 14 days |
+| Follow Up Needed | Need to reach out again | Adds to "Stay in Touch" with higher priority |
+| Other | General contact | Normal contact reminder reset |
 
 ## Contact History View
 
@@ -36,10 +54,10 @@ In venue detail, option to view full contact history:
 ```
 ┌─ Contact History: The Blue Note ──────────────────────────┐
 │                                                           │
-│ 2025-01-30  Email   Asked about March dates              │
-│ 2025-01-15  Phone   Confirmed Feb 1 show                 │
-│ 2024-12-10  Email   Initial booking inquiry              │
-│ 2024-11-05  In Person  Met at open mic                   │
+│ 2025-01-30  Email   Awaiting    Asked about March dates  │
+│ 2025-01-15  Phone   Booked      Confirmed Feb 1 show     │
+│ 2024-12-10  Email   Awaiting    Initial booking inquiry  │
+│ 2024-11-05  In Person  Booked   Met at open mic          │
 │                                                           │
 │ [n] New Contact  [q] Close                               │
 └───────────────────────────────────────────────────────────┘
@@ -69,6 +87,13 @@ In venue list, "Last Contact" column shows:
 - Date of most recent contact log entry
 - If no entries: "Never"
 - Color coding: red if > 90 days, yellow if > 60 days
+
+## Follow-Up Reminders
+
+When a contact has `follow_up_date` set:
+- Appears in Dashboard "Needs Attention" section on that date
+- Included in Smart Report with elevated priority
+- Shows notification badge on Venues screen
 
 ## Related Features
 

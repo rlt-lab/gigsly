@@ -25,6 +25,13 @@ dependencies = [
     "pydantic>=2.0.0",
     "icalendar>=5.0.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+]
 ```
 
 ## Data Storage

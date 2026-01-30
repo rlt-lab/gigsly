@@ -58,7 +58,10 @@ See: [Data Model](./features/01-data-model.md)
 | `c` | Calendar |
 | `r` | Report |
 | `?` | Help |
+| `Ctrl+,` | Settings |
 | `q` | Quit / Back |
+
+See: [Keyboard Shortcuts Master List](./features/00-keyboard-shortcuts.md) for complete reference.
 
 ### Screens
 
@@ -114,6 +117,7 @@ Income grouped by W-9 status (helps reconcile 1099s). Mileage calculated from ve
 | Tax Reports | [09-tax-reports.md](./features/09-tax-reports.md) |
 | ICS Calendar | [10-ics-calendar.md](./features/10-ics-calendar.md) |
 | Settings & Backup | [11-settings-backup.md](./features/11-settings-backup.md) |
+| Dashboard | [12-dashboard.md](./features/12-dashboard.md) |
 
 ## Implementation Plan
 

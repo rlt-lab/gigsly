@@ -59,10 +59,44 @@ Venues are the core entity - locations where you perform. Each venue stores cont
 | `n` | Add new venue |
 | `Enter` | View venue details |
 | `e` | Edit venue (in detail view) |
+| `d` | Delete venue (in detail view) |
 | `c` | Log contact (in detail view) |
 | `s` | View shows at this venue |
 | `/` | Focus search |
 | `q` | Go back |
+
+## Delete Venue
+
+Press `d` in venue detail view to delete:
+
+```
+┌─ Delete Venue ────────────────────────────────────────────────┐
+│                                                               │
+│  ⚠ Delete "The Blue Note"?                                   │
+│                                                               │
+│  This venue has:                                              │
+│    • 15 past shows ($2,850 total)                            │
+│    • 3 upcoming shows                                         │
+│    • 1 active recurring gig                                   │
+│                                                               │
+│  Deleting will:                                               │
+│    • Cancel all upcoming shows                                │
+│    • End all recurring gigs                                   │
+│    • Keep past shows for tax records (venue name preserved)   │
+│                                                               │
+│  Type "DELETE" to confirm: [________]                        │
+│                                                               │
+│                                    [Cancel]                   │
+└───────────────────────────────────────────────────────────────┘
+```
+
+### Deletion Behavior
+
+- **Past shows**: Retained with venue name denormalized (for tax records)
+- **Upcoming shows**: Marked as cancelled
+- **Recurring gigs**: Ended (end_date set to today)
+- **Contact logs**: Retained for historical record
+- Requires typing "DELETE" to prevent accidental deletion
 
 ## Add/Edit Venue Form
 

@@ -26,6 +26,7 @@
   - Venue detail view with all fields
   - Add venue form (`n` key)
   - Edit venue functionality
+  - Delete venue with confirmation
   - See: [Venues](./plans/features/02-venues.md)
 
 - [ ] **2.2** Build Shows screen
@@ -33,7 +34,9 @@
   - Quick add show (`n` - existing venue)
   - Add show with new venue (`N`)
   - Mark paid / mark invoice sent actions
+  - Delete show with confirmation
   - See: [Shows](./plans/features/03-shows.md)
+  - **Depends on**: 2.1 (venue selection requires venues)
 
 - [ ] **2.3** Build Calendar screen
   - Month view with show markers
@@ -41,12 +44,15 @@
   - Toggle between views (`Tab` or `m`/`a`)
   - Navigate months (`←`/`→`)
   - See: [Calendar](./plans/features/04-calendar.md)
+  - **Depends on**: 2.2 (calendar displays shows)
 
 - [ ] **2.4** Build Dashboard screen
   - Quick stats (upcoming shows, YTD earnings, unpaid balance)
-  - Mini calendar (next 2 weeks)
-  - Action needed badge
+  - Next 14 days show list
+  - Needs attention section with action items
   - Navigation shortcuts
+  - See: [Dashboard](./plans/features/12-dashboard.md)
+  - **Depends on**: 2.2, 2.3 (reuses show list components)
 
 ## Phase 3: Advanced Features
 
@@ -114,9 +120,12 @@
   - First-run welcome/tutorial
 
 - [ ] **6.3** Testing and documentation
-  - Unit tests for business logic
-  - Integration tests for database
+  - Unit tests for business logic (pytest)
+  - Integration tests for database (pytest + fixtures)
+  - TUI tests using Textual's pilot testing framework
+  - Test coverage target: 80% for business logic
   - Update README with usage instructions
+  - See: [Testing Strategy](#testing-strategy)
 
 ---
 
@@ -125,6 +134,46 @@
 1. **Foundation first** - Can't build anything without the data layer
 2. **Venues before Shows** - Shows depend on venues existing
 3. **Calendar after Shows** - Calendar displays show data
-4. **Recurring gigs after basic shows** - Builds on show creation
-5. **Reports after core data** - Need data to report on
-6. **Import/Export last** - Nice-to-have, not blocking core functionality
+4. **Dashboard after Calendar** - Reuses show list and calendar components
+5. **Recurring gigs after basic shows** - Builds on show creation
+6. **Reports after core data** - Need data to report on
+7. **Import/Export last** - Nice-to-have, not blocking core functionality
+
+---
+
+## Testing Strategy
+
+### Test Framework
+- **pytest** for all tests
+- **pytest-asyncio** for async database operations
+- **Textual pilot** for TUI component testing
+
+### Test Categories
+
+| Category | Location | Coverage Target |
+|----------|----------|-----------------|
+| Unit tests | `tests/unit/` | Business logic, scoring algorithms |
+| Database tests | `tests/db/` | CRUD operations, migrations |
+| TUI tests | `tests/tui/` | Screen navigation, keyboard shortcuts |
+| CLI tests | `tests/cli/` | Command parsing, output format |
+
+### Fixtures
+
+Standard test fixtures in `tests/conftest.py`:
+- `test_db`: In-memory SQLite database
+- `sample_venues`: 3 venues with varying attributes
+- `sample_shows`: Shows covering past, future, paid, unpaid
+- `sample_recurring`: Weekly and monthly recurring gigs
+
+### Running Tests
+
+```bash
+# All tests
+uv run pytest
+
+# With coverage
+uv run pytest --cov=gigsly --cov-report=html
+
+# Specific category
+uv run pytest tests/unit/
+```

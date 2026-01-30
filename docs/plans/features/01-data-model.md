@@ -40,6 +40,8 @@ Individual gig/performance record.
 | venue_id | INTEGER | Foreign key to Venue |
 | recurring_gig_id | INTEGER | Foreign key to RecurringGig (nullable) |
 | date | DATE | Show date |
+| start_time | TIME | Gig start time (nullable) |
+| end_time | TIME | Gig end time (nullable) |
 | pay_amount | REAL | Payment for this show |
 | payment_status | TEXT | pending, paid |
 | payment_received_date | DATE | When payment was received |
@@ -80,6 +82,8 @@ Track outreach to venues.
 | venue_id | INTEGER | Foreign key to Venue |
 | contacted_at | DATETIME | When contact was made |
 | method | TEXT | email, phone, in_person, other |
+| outcome | TEXT | booked, declined, no_response, follow_up, other (nullable) |
+| follow_up_date | DATE | When to follow up (nullable) |
 | notes | TEXT | What was discussed |
 | created_at | DATETIME | Record creation timestamp |
 

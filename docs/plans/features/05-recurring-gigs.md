@@ -104,6 +104,32 @@ Every:   [3] weeks
 - Future instances beyond end_date are not generated
 - Existing instances remain
 
+## Edge Cases
+
+### Fifth Weekday Problem
+
+For patterns like "5th Saturday of every month", some months don't have a 5th occurrence.
+
+**Behavior**: Skip months without the specified occurrence. No show is generated for that month.
+
+**Example**: "5th Saturday" pattern
+- January 2025: Has 5th Saturday (Jan 29) → show generated
+- February 2025: No 5th Saturday → no show generated
+- March 2025: Has 5th Saturday (Mar 29) → show generated
+
+### Month-End Dates
+
+For "monthly on the 31st" pattern:
+- Months with 31 days: Show on 31st
+- Months with 30 days: Show on 30th
+- February: Show on 28th (or 29th in leap year)
+
+**Behavior**: Use last day of month when specified day doesn't exist.
+
+### Year Boundary
+
+Recurring instances continue across year boundaries. Tax reports calculate based on show date, not recurring gig creation date.
+
 ## Display in Show List
 
 Recurring shows display with indicator:

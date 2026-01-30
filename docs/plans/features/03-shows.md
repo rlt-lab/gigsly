@@ -33,8 +33,38 @@ Shows represent individual gigs. Each show is linked to a venue and tracks date,
 | `Enter` | View/edit show details |
 | `p` | Mark as paid |
 | `i` | Mark invoice sent |
-| `d` | Delete show |
+| `d` | Delete show (with confirmation) |
 | `q` | Go back |
+
+## Delete Show Confirmation
+
+```
+┌─ Delete Show ─────────────────────────────────────────────────┐
+│                                                               │
+│  Delete show at The Blue Note on Feb 1, 2025?                │
+│                                                               │
+│  Pay: $200 (pending)                                          │
+│                                                               │
+│  This action cannot be undone.                                │
+│                                                               │
+│                              [Delete]  [Cancel]               │
+└───────────────────────────────────────────────────────────────┘
+```
+
+For recurring show instances, additional option:
+
+```
+┌─ Delete Recurring Show ───────────────────────────────────────┐
+│                                                               │
+│  This show is part of a recurring series.                    │
+│                                                               │
+│  ○ Delete this instance only                                 │
+│  ○ Delete this and all future instances                      │
+│  ○ Delete entire series (past and future)                    │
+│                                                               │
+│                              [Delete]  [Cancel]               │
+└───────────────────────────────────────────────────────────────┘
+```
 
 ## Add Show Flow
 

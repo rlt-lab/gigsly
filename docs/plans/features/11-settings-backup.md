@@ -18,7 +18,7 @@ All Gigsly data lives in `~/.gigsly/`:
 
 ## Settings Screen
 
-Access via `?` key or main menu → Settings:
+Access via `Ctrl+,` key or main menu → Settings:
 
 ```
 ┌─ Settings ────────────────────────────────────────────────┐
