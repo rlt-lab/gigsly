@@ -90,6 +90,31 @@ If no items need attention: "✓ All caught up!"
 - Background refresh every 60 seconds while visible
 - Manual refresh with `Ctrl+R`
 
+## Empty & Loading States
+
+**Loading**: Stats cards show "—" placeholders, lists show skeleton rows.
+
+**Empty (brand new user)**:
+```
+┌─ Dashboard ──────────────────────────────────────────────────┐
+│                                                              │
+│  ╔═══════════════╗  ╔═══════════════╗  ╔═══════════════╗    │
+│  ║  UPCOMING     ║  ║  YTD EARNED   ║  ║  UNPAID       ║    │
+│  ║     0         ║  ║     $0        ║  ║     $0        ║    │
+│  ║   shows       ║  ║               ║  ║               ║    │
+│  ╚═══════════════╝  ╚═══════════════╝  ╚═══════════════╝    │
+│                                                              │
+│  ─── GETTING STARTED ──────────────────────────────────────│
+│                                                              │
+│  Welcome to Gigsly! Here's how to get started:              │
+│                                                              │
+│  1. Press [v] to add your first venue                       │
+│  2. Press [n] to add a show                                 │
+│  3. Press [r] to see your action report                     │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
 ## Related Features
 
 - [Shows](./03-shows.md)

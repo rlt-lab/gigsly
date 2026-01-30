@@ -17,7 +17,7 @@ Each venue is scored based on these factors. Raw scores are uncapped but categor
 |--------|--------|---------|
 | Unpaid gigs | 35 pts | +35 for first unpaid gig > 30 days, +15 for each additional |
 | Invoice pending | 30 pts | +30 for first, +10 for each additional |
-| Booking window approaching | 20 pts | +20 if ≤7 days, +10 if ≤14 days |
+| Booking window approaching | 25 pts | +25 if currently open, +20 if ≤3 days, +10 if ≤7 days |
 | Low show count | 10 pts | +10 if 0 upcoming, +5 if 1-2 upcoming |
 | Days since contact | 5 pts | +5 if 90+ days, +3 if 60-89 days |
 
@@ -100,6 +100,43 @@ payment_overdue_days = 30
 low_show_count = 2
 contact_reminder_days = 60
 booking_window_alert_days = 7
+```
+
+## Empty & Loading States
+
+**Loading**: Show spinner with "Calculating priorities..."
+
+**Empty (all caught up)**:
+```
+═══════════════════════════════════════════════════════════
+                    GIGSLY ACTION REPORT
+                      January 30, 2025
+═══════════════════════════════════════════════════════════
+
+                    ✓ All caught up!
+
+  No payments overdue
+  No invoices needed
+  No urgent booking windows
+  All venues contacted recently
+
+═══════════════════════════════════════════════════════════
+```
+
+**Empty (brand new user)**:
+```
+═══════════════════════════════════════════════════════════
+                    GIGSLY ACTION REPORT
+═══════════════════════════════════════════════════════════
+
+                    No data yet
+
+  Add venues and shows to start tracking your gigs.
+
+  Press [v] to add your first venue
+  Press [n] to add your first show
+
+═══════════════════════════════════════════════════════════
 ```
 
 ## Related Features

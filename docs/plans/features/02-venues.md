@@ -124,6 +124,26 @@ Fields in order:
 - Needs contact (60+ days)
 - Booking window soon
 
+## Empty & Loading States
+
+**Loading**: Show spinner with "Loading venues..." while fetching from database.
+
+**Empty (no venues)**:
+```
+┌─ Venues ──────────────────────────────────────────────────┐
+│                                                           │
+│                    No venues yet                          │
+│                                                           │
+│         Press [n] to add your first venue                │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+```
+
+**Empty (filter has no results)**:
+```
+No venues match this filter. [Clear filter]
+```
+
 ## Related Features
 
 - [Data Model](./01-data-model.md)

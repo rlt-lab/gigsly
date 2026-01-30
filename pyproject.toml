@@ -1,7 +1,38 @@
 [project]
 name = "gigsly"
 version = "0.1.0"
-description = "Add your description here"
+description = "TUI application for musicians to track gigs, venues, payments, and booking outreach"
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "textual>=0.47.0",
+    "sqlalchemy>=2.0.0",
+    "click>=8.1.0",
+    "tomli>=2.0.0;python_version<'3.11'",
+    "tomli-w>=1.0.0",
+    "icalendar>=5.0.0",
+]
+
+[project.scripts]
+gigsly = "gigsly.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

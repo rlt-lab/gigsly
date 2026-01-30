@@ -76,8 +76,18 @@ Every:   [3] weeks
 
 - Changes only affect that specific show
 - Show retains link to recurring gig but has overridden values
+- Editable fields: date, pay_amount, start_time, end_time, notes, is_cancelled
 
 ### Edit Recurring Series
+
+Editable series-level fields:
+- `pay_amount` - applies to future generated instances only
+- `end_date` - stop generating new instances
+- `is_active` - pause/resume generation
+
+Non-editable (require creating new series):
+- `pattern_type`, `day_of_week`, `day_of_month`, `ordinal`, `interval_weeks`
+- `venue_id` - series is tied to venue
 
 ```
 ┌─ Edit Recurring Series ───────────────────────────────────┐
@@ -113,9 +123,9 @@ For patterns like "5th Saturday of every month", some months don't have a 5th oc
 **Behavior**: Skip months without the specified occurrence. No show is generated for that month.
 
 **Example**: "5th Saturday" pattern
-- January 2025: Has 5th Saturday (Jan 29) → show generated
-- February 2025: No 5th Saturday → no show generated
 - March 2025: Has 5th Saturday (Mar 29) → show generated
+- April 2025: No 5th Saturday → no show generated
+- May 2025: Has 5th Saturday (May 31) → show generated
 
 ### Month-End Dates
 

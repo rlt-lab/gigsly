@@ -95,6 +95,18 @@ When pressing Enter on a date with shows:
 - This month
 - Next 3 months
 
+## Empty & Loading States
+
+**Loading**: Show spinner in center of calendar grid.
+
+**Empty (no shows in visible range)**:
+- Month view: Calendar displays normally with no show markers
+- Agenda view:
+```
+No shows in this time range.
+Press [n] to add a show.
+```
+
 ## Related Features
 
 - [Shows](./03-shows.md)

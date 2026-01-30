@@ -7,7 +7,7 @@ Generate year-end summaries for tax purposes, including income breakdown by W-9 
 ## Access
 
 - **CLI**: `gigsly tax 2025` or `gigsly tax` (defaults to current year)
-- **TUI**: Reports menu → Tax Report
+- **TUI**: Settings screen → [Export Tax Report] button (generates to file)
 
 ## W-9 Tracking
 

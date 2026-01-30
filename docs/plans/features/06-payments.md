@@ -85,6 +85,26 @@ Only available when venue has `requires_invoice = true`:
 | Paid | "paid" | green |
 | Needs invoice, not sent | "needs invoice" | orange |
 
+### Status Calculation Rules
+
+**Days calculation**: Uses calendar days from show date to today (not exact hours).
+
+```
+Days unpaid = (today's date) - (show date)
+```
+
+**Example**: Show on Jan 1, today is Jan 31 → "OVERDUE (30d)"
+
+**Priority when multiple conditions apply**:
+1. If `payment_status = "paid"` → always show "paid" (green)
+2. If show is in future → always show "pending" (gray)
+3. If `needs_invoice` AND show is past → show "needs invoice" (orange)
+4. Otherwise → show "UNPAID" or "OVERDUE" based on days
+
+**Note**: "needs invoice" only shows if venue has `requires_invoice = true` AND invoice hasn't been sent AND show is in the past AND payment is pending.
+
+See: [Algorithms](./13-algorithms.md) for exact calculation functions
+
 ## Dashboard Stats
 
 - **Unpaid balance**: Sum of pay_amount where status = pending and date is past
@@ -96,3 +116,4 @@ Only available when venue has `requires_invoice = true`:
 - [Shows](./03-shows.md)
 - [Smart Reports](./08-smart-reports.md)
 - [Tax Reports](./09-tax-reports.md)
+- [Algorithms](./13-algorithms.md)

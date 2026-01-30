@@ -172,6 +172,24 @@ Available from any screen (unless overridden by context):
 
 **Rule**: On Venues detail, `s` shows venue-specific shows. Both are "shows" so this is intuitive.
 
+### Conflict Resolution Matrix
+
+Quick reference for what each key does in each context:
+
+| Key | Dashboard | Venues List | Venues Detail | Shows List | Shows Detail | Calendar | Report |
+|-----|-----------|-------------|---------------|------------|--------------|----------|--------|
+| `d` | - | Dashboard | **Delete** | **Delete** | **Delete** | Dashboard | Dashboard |
+| `c` | Calendar | Calendar | **Log Contact** | Calendar | Calendar | - | Calendar |
+| `s` | Shows | Shows | **Venue's Shows** | - | - | Shows | Shows |
+| `v` | Venues | - | - | Venues | Venues | Venues | Venues |
+| `r` | Report | Report | Report | Report | Report | Report | - |
+| `n` | - | New Venue | New Contact | New Show | - | New Show | - |
+| `e` | - | - | Edit Venue | - | Edit Show | Export ICS | - |
+| `p` | - | - | - | Mark Paid | Mark Paid | - | - |
+| `i` | - | - | - | Invoice Sent | Invoice Sent | - | - |
+
+**Bold** = Context override of global shortcut
+
 ---
 
 ## Consistency Rules
@@ -225,3 +243,28 @@ Tab Toggle view                 p  Mark paid
 t   Today
 e   Export ICS
 ```
+
+## Help Overlay (`?` key)
+
+Pressing `?` from any screen shows a modal with context-sensitive shortcuts:
+
+```
+┌─ Keyboard Shortcuts ──────────────────────────────────────┐
+│                                                           │
+│  NAVIGATION              ACTIONS                          │
+│  d  Dashboard            n  New item                      │
+│  v  Venues               e  Edit                          │
+│  s  Shows                d  Delete                        │
+│  c  Calendar             /  Search                        │
+│  r  Report               f  Filter                        │
+│                                                           │
+│  CURRENT SCREEN: Shows                                    │
+│  p  Mark as paid                                          │
+│  i  Mark invoice sent                                     │
+│  N  New show + new venue                                  │
+│                                                           │
+│                              [q] Close                    │
+└───────────────────────────────────────────────────────────┘
+```
+
+The help overlay shows global shortcuts plus shortcuts specific to the current screen.

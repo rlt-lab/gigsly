@@ -104,6 +104,42 @@ Would import 2 shows, create 1 venue. Run without --dry-run to import.
 | Venue name not found | Create new venue |
 | Event has no location | Use event title as venue name |
 
+### Recurring Events (RRULE)
+
+ICS files may contain recurring events with `RRULE` definitions.
+
+**Import behavior:**
+- If the ICS event has an `RRULE`, offer to create a RecurringGig in Gigsly
+- Parse supported patterns: WEEKLY, MONTHLY (by day or ordinal)
+- Unsupported patterns (complex RRULE): Import as individual shows for each occurrence
+
+```
+┌─ Recurring Event Detected ────────────────────────────────┐
+│                                                           │
+│ "Weekly at The Blue Note" repeats every Saturday         │
+│                                                           │
+│ How would you like to import this?                       │
+│                                                           │
+│ ○ Create recurring gig (will auto-generate future shows) │
+│ ● Import as individual shows (12 occurrences found)      │
+│                                                           │
+│                        [Import]  [Cancel]                 │
+└───────────────────────────────────────────────────────────┘
+```
+
+**Supported RRULE patterns:**
+| ICS Pattern | Gigsly Pattern |
+|-------------|----------------|
+| `FREQ=WEEKLY;BYDAY=SA` | Weekly (Saturday) |
+| `FREQ=WEEKLY;INTERVAL=2;BYDAY=WE` | Bi-weekly (Wednesday) |
+| `FREQ=MONTHLY;BYMONTHDAY=15` | Monthly (15th) |
+| `FREQ=MONTHLY;BYDAY=1SA` | Monthly (First Saturday) |
+
+**Unsupported patterns** (import as individual shows):
+- Complex RRULE with multiple BYDAY values
+- YEARLY frequency
+- COUNT or UNTIL with many occurrences (>50)
+
 ## Google Calendar Workflow
 
 ### Export to Google Calendar
@@ -123,7 +159,7 @@ Would import 2 shows, create 1 venue. Run without --dry-run to import.
 
 ## TUI Access
 
-From Calendar screen, press `e` for export menu:
+### Export (Calendar screen → `e` key)
 
 ```
 ┌─ Export Calendar ─────────────────────────────────────────┐
@@ -139,6 +175,35 @@ From Calendar screen, press `e` for export menu:
 │ File: ~/.gigsly/exports/gigsly-shows-2025-01-30.ics      │
 │                                                           │
 │                        [Export]  [Cancel]                 │
+└───────────────────────────────────────────────────────────┘
+```
+
+### Import (Settings screen → [Import Calendar] button)
+
+```
+┌─ Import Calendar ─────────────────────────────────────────┐
+│                                                           │
+│ Import shows from an ICS file.                           │
+│                                                           │
+│ File: [~/Downloads/calendar.ics          ] [Browse...]   │
+│                                                           │
+│ ─── Preview ─────────────────────────────────────────────│
+│                                                           │
+│ ✓ Feb 1, 2025: "Gig: The Blue Note"                     │
+│   → Will link to: The Blue Note                          │
+│                                                           │
+│ ✓ Feb 8, 2025: "Ryman Show"                             │
+│   → Will create venue: Ryman Show                        │
+│                                                           │
+│ ⚠ Feb 14, 2025: "Valentine's Dinner"                    │
+│   → No venue match  [Import anyway] [Skip]               │
+│                                                           │
+│ ✗ Feb 1, 2025: "Gig: The Blue Note"                     │
+│   → Duplicate, will skip                                 │
+│                                                           │
+│ Summary: 2 shows to import, 1 venue to create            │
+│                                                           │
+│                        [Import]  [Cancel]                 │
 └───────────────────────────────────────────────────────────┘
 ```
 

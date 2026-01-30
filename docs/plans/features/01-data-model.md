@@ -82,7 +82,7 @@ Track outreach to venues.
 | venue_id | INTEGER | Foreign key to Venue |
 | contacted_at | DATETIME | When contact was made |
 | method | TEXT | email, phone, in_person, other |
-| outcome | TEXT | booked, declined, no_response, follow_up, other (nullable) |
+| outcome | TEXT | booked, declined, awaiting_response, follow_up_needed, other (nullable) |
 | follow_up_date | DATE | When to follow up (nullable) |
 | notes | TEXT | What was discussed |
 | created_at | DATETIME | Record creation timestamp |
@@ -105,8 +105,56 @@ Venue (1) ──── (*) Show
 - `contact_log_venue_id_idx` on ContactLog(venue_id)
 - `recurring_gig_venue_id_idx` on RecurringGig(venue_id)
 
+## Invariants & Validation Rules
+
+These constraints must be enforced at the database/model layer:
+
+### Show Constraints
+
+| Constraint | Rule |
+|------------|------|
+| Invoice date consistency | If `invoice_sent = false`, then `invoice_sent_date` must be `NULL` |
+| Payment date consistency | If `payment_status = "pending"`, then `payment_received_date` must be `NULL` |
+| Payment date validity | `payment_received_date` must be >= `date` (can't be paid before the show) |
+| Venue reference | `venue_id` can be `NULL` only for orphaned past shows (venue deleted) |
+| Orphaned shows | If `venue_id = NULL`, then `venue_name_snapshot` must be set |
+
+### Venue Constraints
+
+| Constraint | Rule |
+|------------|------|
+| Booking window range | `booking_window_start` and `booking_window_end` must be 1-31 or `NULL` |
+| Mileage non-negative | `mileage_one_way` must be >= 0 or `NULL` |
+| Payment method enum | `payment_method` must be one of: cash, check, venmo, cashapp, paypal, direct_deposit, or `NULL` |
+
+### RecurringGig Constraints
+
+| Constraint | Rule |
+|------------|------|
+| Date range | If `end_date` is set, it must be >= `start_date` |
+| Pattern type enum | `pattern_type` must be: weekly, biweekly, monthly_date, monthly_ordinal, custom |
+| Day of week range | `day_of_week` must be 0-6 (Monday-Sunday) when used |
+| Day of month range | `day_of_month` must be 1-31 when used |
+| Ordinal range | `ordinal` must be 1-5 when used |
+
+### ContactLog Constraints
+
+| Constraint | Rule |
+|------------|------|
+| Method enum | `method` must be: email, phone, in_person, other |
+| Outcome enum | `outcome` must be: booked, declined, awaiting_response, follow_up_needed, other, or `NULL` |
+
+## Additional Fields (Not in Base Schema)
+
+For venue deletion support, Show needs an additional field:
+
+| Column | Type | Description |
+|--------|------|-------------|
+| venue_name_snapshot | TEXT | Preserved venue name when venue is deleted |
+
 ## Related Features
 
 - [Venues](./02-venues.md)
 - [Shows](./03-shows.md)
 - [Recurring Gigs](./05-recurring-gigs.md)
+- [Algorithms](./13-algorithms.md)

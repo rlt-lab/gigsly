@@ -30,8 +30,10 @@ Access via `Ctrl+,` key or main menu → Settings:
 │ Contact reminder after:    [60    ] days                 │
 │ Booking window alert:      [7     ] days before          │
 │                                                           │
-│ ─── Tax Settings ────────────────────────────────────────│
+│ ─── Tax & Mileage ───────────────────────────────────────│
 │                                                           │
+│ Home address:              [_______________________]     │
+│   (Used for mileage calculations)                        │
 │ IRS mileage rate (2025):   [0.70  ] per mile            │
 │                                                           │
 │ ─── Data ────────────────────────────────────────────────│
@@ -41,7 +43,8 @@ Access via `Ctrl+,` key or main menu → Settings:
 │ Total venues: 12                                          │
 │ Total shows: 47                                           │
 │                                                           │
-│ [Backup Now]  [Restore from Backup]  [Export JSON]       │
+│ [Backup Now]  [Restore from Backup]  [Import Calendar]   │
+│ [Export JSON]  [Export Tax Report]                       │
 │                                                           │
 │                                    [Save]  [Cancel]       │
 └───────────────────────────────────────────────────────────┘
@@ -59,6 +62,7 @@ contact_reminder_days = 60
 booking_window_alert_days = 7
 
 [tax]
+home_address = ""
 irs_mileage_rate_2024 = 0.67
 irs_mileage_rate_2025 = 0.70
 
@@ -125,11 +129,47 @@ gigsly restore backup.json --dry-run
 5. Import all records
 6. Report summary
 
-### Merge Option (Future)
+### Merge Option
 
 ```bash
 # Merge backup with existing data (skip duplicates)
 gigsly restore backup.json --merge
+```
+
+**Merge behavior:**
+- Venues: Match by name (case-insensitive). If exists, skip. If not, import.
+- Shows: Match by venue_id + date. If exists, skip. If not, import.
+- RecurringGigs: Match by venue_id + pattern_type + day_of_week. If exists, skip.
+- ContactLogs: Always import (append to history).
+
+**Merge preview:**
+```
+$ gigsly restore backup.json --merge --dry-run
+
+Merge Preview:
+  Venues:       3 new, 9 existing (skip)
+  Shows:        12 new, 35 existing (skip)
+  Recurring:    1 new, 2 existing (skip)
+  Contacts:     24 to import
+
+Run without --dry-run to apply.
+```
+
+**TUI access**: Settings screen → [Restore from Backup] button shows:
+
+```
+┌─ Restore from Backup ─────────────────────────────────────┐
+│                                                           │
+│ File: [~/.gigsly/backups/backup-2025-01-15.json] [Browse] │
+│                                                           │
+│ Mode:                                                     │
+│ ○ Replace all data (destructive)                         │
+│ ● Merge with existing (keeps current data)               │
+│                                                           │
+│ ⚠ Replace will delete all current data first.           │
+│                                                           │
+│                        [Restore]  [Cancel]                │
+└───────────────────────────────────────────────────────────┘
 ```
 
 ## JSON Export (for spreadsheets)

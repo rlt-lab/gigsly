@@ -47,6 +47,21 @@ From venue detail view, press `c` to log contact:
 | Follow Up Needed | Need to reach out again | Adds to "Stay in Touch" with higher priority |
 | Other | General contact | Normal contact reminder reset |
 
+### Outcome Effect Clarifications
+
+**Awaiting Response (14-day suppression)**:
+- Timer starts from `contacted_at` date, not entry date
+- After 14 days, contact reminder automatically reappears
+- If user contacts again before 14 days, new contact resets the timer
+- Multiple "Awaiting Response" entries: most recent one is used
+
+**Follow Up Date**:
+- If `follow_up_date` is set and in the future, contact reminders are also suppressed
+- Follow-up takes precedence over 14-day awaiting response window
+- When follow-up date arrives, venue appears in Dashboard "Needs Attention"
+
+See: [Algorithms](./13-algorithms.md) for exact calculation rules
+
 ## Contact History View
 
 In venue detail, option to view full contact history:
@@ -99,3 +114,4 @@ When a contact has `follow_up_date` set:
 
 - [Venues](./02-venues.md)
 - [Smart Reports](./08-smart-reports.md)
+- [Algorithms](./13-algorithms.md)

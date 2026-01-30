@@ -109,11 +109,11 @@ For recurring show instances, additional option:
 
 ## Filter Options
 
-- Upcoming (default)
-- Past
-- All
-- Unpaid (past shows, payment_status = pending)
-- Needs invoice
+- Upcoming (default): `date >= today`
+- Past: `date < today`
+- All: no date filter
+- Unpaid: `date < today AND payment_status = 'pending'`
+- Needs invoice: `date < today AND venue.requires_invoice = true AND invoice_sent = false`
 
 ## Status Display Logic
 
@@ -123,6 +123,39 @@ For recurring show instances, additional option:
 | Past show, pending, < 30 days | "UNPAID (Xd)" (yellow) |
 | Past show, pending, >= 30 days | "OVERDUE (Xd)" (red) |
 | Paid | "paid" (green) |
+
+## Empty & Loading States
+
+**Loading**: Show spinner with "Loading shows..." while fetching.
+
+**Empty (no shows)**:
+```
+┌─ Shows ───────────────────────────────────────────────────┐
+│                                                           │
+│                    No shows yet                           │
+│                                                           │
+│         Press [n] to add your first show                 │
+│         Press [N] to add a show with a new venue         │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+```
+
+**Empty (filter has no results)**:
+```
+No shows match "Unpaid" filter. [Clear filter]
+```
+
+## Flash Messages
+
+Toast notifications appear at bottom of screen for 3 seconds:
+
+| Action | Message |
+|--------|---------|
+| Show created | "Show added: {venue} on {date}" |
+| Show deleted | "Show deleted" |
+| Marked paid | "Marked as paid: ${amount}" |
+| Invoice sent | "Invoice marked as sent" |
+| New venue created | "Venue '{name}' created - press [v] to add details" |
 
 ## Related Features
 
